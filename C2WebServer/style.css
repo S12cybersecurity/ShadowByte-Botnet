@@ -1,0 +1,61 @@
+body{
+    background-color:  rgba(0, 0, 0, 0.9)
+}
+h1{
+    font-family: "Open Sans", sans-serif;
+    color: rgb(252, 184, 102);
+    text-align: center;
+    margin-top: 1%;
+}
+h2{
+    color : rgb(255, 80, 103);
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    margin-top: 1%;
+}
+
+.zombieTable{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    border-spacing : 35px;
+    font-size: 20px;
+}
+
+.zombieTable th{
+    color: rgb(255, 37, 66);
+    font-family: "Open Sans", sans-serif;
+}
+
+.zombieTable td{
+    color: rgb(252, 184, 102);
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+}
+
+.commandForm {
+    margin: 10px;
+    text-align: center;
+}
+  
+.commandInput {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    background-color: rgb(148, 0, 0);
+    color: #fff;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}

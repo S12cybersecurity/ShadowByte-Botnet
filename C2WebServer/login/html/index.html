@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="S12">
+        <meta name="lang" content="en">
+        <meta name="description" content="Login Botnet Server">
+        <title>Login Botnet Server</title>
+        <link rel="stylesheet" href="../css/login.css">
+        <script src="../js/login.js"></script>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <div id="toast" class="toast"></div>
+        <div class="loginForm">
+            <h1>Welcome!</h1>
+            <form action="../../controller/login.php" method="post">
+                <label class="userLabel">Username</label>
+                <input type="text" name="username" placeholder="Username" id="userBox" required>
+                <br>
+                <label class="passLabel">Password</label>
+                <input type="password" name="password" placeholder="Password" id="passwordBox" required>      
+                <input type="submit" name="submit" value="LOGIN" id="button">
+            </form>
+            <div id="message"></div>       
+        </div>
+    </body>
+</html>
