@@ -1,6 +1,8 @@
 # ShadowByte Botnet
 Complete Botnet Infrastucture with Malicious C&amp;C Server And Malware Agents to infect Windows OS
 
+### DO NOT USE IN PRODUCTION ENVIRONMENTS — THIS IS NOT PROPERLY TESTED OR MAINTAINED
+
 A completely botnet infrastructure created with C++ in victim side and Web Languages (HTML,CSS,JavaScript and PHP) in malicious server in attacker side.
 
 The architecture of Shadow Byte is truly remarkable, combining the robustness of C++ for the victim-side code with the flexibility and interactivity of web languages such as HTML, CSS, JavaScript, and PHP on the attacker's server. This lethal combination allows for seamless communication between the infected machines and the centralized command and control server.
